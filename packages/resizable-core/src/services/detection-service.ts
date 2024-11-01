@@ -50,12 +50,14 @@ const getMouseDownOnHandle = (
   const closestCoordinate = copyForSort.pop()
 
   const closestIndex = resizerClickedCoordinateList.indexOf(closestCoordinate)
-  const [x1, x2, handleId] = detectionDetails[closestIndex]
-  if (closestCoordinate <= ((x2 - x1) / 2)) {
-    resizable.previousTouchEvent = e
-    const resizableEvent = getResizableEvent(e, vertical, {})
-    resizable.onMouseDown(resizableEvent, handleId)
-    registerResizeEvent()
+  if (detectionDetails.length > closestIndex && detectionDetails[closestIndex].length >= 3) {
+    const [x1, x2, handleId] = detectionDetails[closestIndex]
+    if (closestCoordinate <= ((x2 - x1) / 2)) {
+      resizable.previousTouchEvent = e
+      const resizableEvent = getResizableEvent(e, vertical, {})
+      resizable.onMouseDown(resizableEvent, handleId)
+      registerResizeEvent()
+    }
   }
 }
 
